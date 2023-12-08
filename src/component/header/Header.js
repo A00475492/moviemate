@@ -11,6 +11,7 @@ import { Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText } fr
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 
 const RESTRICT_PATHS = [
@@ -55,6 +56,9 @@ const Header = ({ pathVal }) => {
     }
     const ViewWatchList=()=>{
         navigate('/watchList');
+    }
+    const paymentDashboard=()=>{
+        navigate('/paymentDashboard');
     }
 
 
@@ -145,6 +149,14 @@ const Header = ({ pathVal }) => {
                                         <DeleteIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Delete Genre" />
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem disablePadding>
+                                <ListItemButton onClick={() => paymentDashboard()}>
+                                    <ListItemIcon>
+                                        <MonetizationOnIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="PaymentDashboard" />
                                 </ListItemButton>
                             </ListItem>
                         </>

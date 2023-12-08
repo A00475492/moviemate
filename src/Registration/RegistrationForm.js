@@ -298,7 +298,6 @@ const RegistrationForm = ({ onRegistration }) => {
           >
             <option value="user">User</option>
             <option value="producer">Producer</option>
-            <option value="admin">Admin</option>
           </select>
             </div>
 

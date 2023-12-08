@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './PaymentForm.css';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 
@@ -14,7 +16,7 @@ const PaymentForm = () => {
   const userId = user.id;
   console.log("Uder date is ",userId);
 
-  const Movie = location.state.formData;
+  const movie = location.state.formData;
   
   const [name, setName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
@@ -70,7 +72,6 @@ const PaymentForm = () => {
     const inputValue = e.target.value;
     setExpiry(inputValue);
 
-    // Simple regex to validate MM/YY format
     const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
 
     const isValidFormat = expiryRegex.test(inputValue);
@@ -90,43 +91,52 @@ const PaymentForm = () => {
       console.error('Invalid form data. Please check all fields.');
       return;
     }
+    const expire=expiry;
     const paymentPayload = {
       name,
       cardNumber,
-      expiry,
+      expire,
       cvv,
       cardType,
-      Movie,
+      movie,
       userId
     };
     console.log('Form submitted', JSON.stringify(paymentPayload));
     try {
        
-      const response = await fetch('YOUR_API_ENDPOINT', {
+      const response = await fetch('https://moviemate.azurewebsites.net/api/SponsorshipPayment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: paymentPayload,
+        body: JSON.stringify(paymentPayload),
       });
   
       if (response.ok) {
         console.log('Payment successful:');
-        setTimeout(() => {
-          navigate('/moviehome'); // Navigate to moviehome.js
-        }, 2000);
+        Swal.fire({
+          icon: 'success',
+          title: 'Payment done successfully',
+          text: 'Redirecting to home page',
+        });
+        navigate("/moviehome");
       } else {
         console.error('Payment failed:', response.statusText);
-        setTimeout(() => {
-          
-          navigate('/moviehome'); // Navigate to moviehome.js
-        }, 2000); 
+        Swal.fire({
+          icon: 'failure',
+          title: 'Payment failed could not be completed',
+          text: 'Redirecting to home page',
+        });
+        navigate("/moviehome");
       }
     } catch (error) {
       console.error('Error during payment:', error.message);
-        setTimeout(() => {
-          navigate('/moviehome'); // Navigate to moviehome.js
-        }, 2000); 
+      Swal.fire({
+        icon: 'failure',
+        title: 'Payment failed could not be completed',
+        text: 'Redirecting to home page',
+      });
+      navigate("/moviehome");
     }
   };
   const isFormValid =

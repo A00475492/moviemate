@@ -20,6 +20,26 @@ const AddMovieForm = ({ onAddMovie }) => {
   });
   const [actors, setActors] = useState([]);
   const [genres, setGenres] = useState([]);
+  const user = JSON.parse(localStorage.getItem('userData'));
+
+  useEffect(() => {
+    if (!user ) {
+        Swal.fire({
+        icon: 'error',
+        title: 'Unauthorized Access',
+        text: 'You need to log in to access this page.',
+      });
+      navigate("/login");
+    }
+    else if(user.userType==="user"){
+        Swal.fire({
+          icon: 'error',
+          title: 'Unauthorized Access',
+          text: "You don't have necessary permission to access this page",
+        });
+        navigate("/moviehome");
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const fetchActors = async () => {
@@ -246,7 +266,7 @@ const AddMovieForm = ({ onAddMovie }) => {
         </label>
 
         <label>
-          Promote Movie ($1000):
+          Promote Movie ($50):
           <Checkbox
             checked={promoteMovie}
             onChange={handleCheckboxChange}

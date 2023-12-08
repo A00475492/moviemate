@@ -45,7 +45,8 @@ const WatchList = () => {
           <div className="right-side">
             <h2>{entry.title}</h2>
             <p>{entry.synopsis}</p>
-            <p>Release Date: {entry.releaseDate}</p>
+            <p>{entry.genre.name}</p>
+            <p>Release Date: {new Date(entry.releaseDate).toLocaleDateString('en-US')}</p>
             <Box component="fieldset" borderColor="transparent" >
             <Rating name="read-only" value={entry.averageRating} readOnly precision={0.5} />
           </Box>

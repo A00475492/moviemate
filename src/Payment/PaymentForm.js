@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PaymentForm.css';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -13,10 +13,30 @@ const PaymentForm = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('userData'));
   
-  const userId = user.id;
+  const userId = user ? user.id : null;
   console.log("Uder date is ",userId);
+  
 
-  const movie = location.state.formData;
+  const movie = (location.state && location.state.formData) || null;
+
+  useEffect(() => {
+    if (!user ) {
+        Swal.fire({
+        icon: 'error',
+        title: 'Unauthorized Access',
+        text: 'You need to log in to access this page.',
+      });
+      navigate("/login");
+    }
+    else if(user.userType==="user"){
+        Swal.fire({
+          icon: 'error',
+          title: 'Unauthorized Access',
+          text: "You don't have necessary permission to access this page",
+        });
+        navigate("/moviehome");
+    }
+  }, [user, navigate]);
   
   const [name, setName] = useState('');
   const [cardNumber, setCardNumber] = useState('');

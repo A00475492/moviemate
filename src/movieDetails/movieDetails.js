@@ -160,7 +160,7 @@ const MovieDetails = () => {
           <div className="movie-info">
         <h2>{movieDetails.title}</h2>
         <p className="synopsis">Synopsis: {movieDetails.synopsis}</p>
-        <p className="genre">Genre: {movieDetails.genreID}</p>
+        <p className="genre">Genre: {movieDetails.genre.name}</p>
         <p className="average-rating">
           Average Rating:
           <Box component="fieldset" borderColor="transparent" >

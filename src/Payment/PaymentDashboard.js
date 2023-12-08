@@ -17,24 +17,22 @@ const PaymentDashboard = () => {
   const user = JSON.parse(localStorage.getItem('userData'));
   const navigate = useNavigate();
 
-
   const amountPerPayment = 50;
   useEffect(() => {
-    if (!user ) {
-        Swal.fire({
+    if (!user) {
+      Swal.fire({
         icon: 'error',
         title: 'Unauthorized Access',
         text: 'You need to log in to access this page.',
       });
       navigate("/login");
-    }
-    else if(user.userType==="user"){
-        Swal.fire({
-          icon: 'error',
-          title: 'Unauthorized Access',
-          text: "You don't have necessary permission to access this page",
-        });
-        navigate("/moviehome");
+    } else if (user.userType === "user") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Unauthorized Access',
+        text: "You don't have necessary permission to access this page",
+      });
+      navigate("/moviehome");
     }
   }, [user, navigate]);
 
@@ -86,22 +84,22 @@ const PaymentDashboard = () => {
 const TableWithLinks = ({ paymentDetails, handleMovieLinkClick, amountPerPayment }) => {
   return (
     <table style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
-      <thead style={{ borderBottom: '2px solid #333' }}>
+      <thead style={{ borderBottom: '2px solid #333', background: '#f0f0f0' }}>
         <tr>
           <th style={tableHeaderStyle}>ID</th>
-          <th style={tableHeaderStyle}>Movie ID</th>
+          <th style={tableHeaderStyle}>Movie Details</th>
           <th style={tableHeaderStyle}>User Name</th>
           <th style={tableHeaderStyle}>Card Type</th>
           <th style={tableHeaderStyle}>Amount</th>
         </tr>
       </thead>
       <tbody>
-        {paymentDetails.map((payment) => (
-          <tr key={payment.sponsorshipPaymentID} style={{ borderBottom: '1px solid #ccc' }}>
+        {paymentDetails.map((payment, index) => (
+          <tr key={payment.sponsorshipPaymentID} style={{ borderBottom: '1px solid #ccc', background: index % 2 === 0 ? '#f9f9f9' : 'white' }}>
             <td style={tableCellStyle}>{payment.sponsorshipPaymentID}</td>
             <td style={tableCellStyle}>
               <Link to={`/movie/${payment.movieID}`} onClick={() => handleMovieLinkClick(payment.movieID)}>
-                {payment.movieID}
+                {` Click for Movie Details`}
               </Link>
             </td>
             <td style={tableCellStyle}>{payment.name}</td>
@@ -120,8 +118,10 @@ const tableHeaderStyle = {
   fontWeight: 'bold',
 };
 
+
 const tableCellStyle = {
   padding: '10px',
+  border: '1px solid #ccc', // Add this line to include border
 };
 
 export default PaymentDashboard;

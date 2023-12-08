@@ -125,11 +125,12 @@ const MovieDetails = () => {
           text: 'The movie has been added to your watchlist successfully.',
         });
       } else {
+        console.error(response.statusText);
         console.error('Failed to add to watchlist:', response.statusText);
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong. Please try again later.',
+          title: 'Movie is already in your watchlist',
+          text: 'Movie cannot be added more than once',
         });
       }
     } catch (error) {

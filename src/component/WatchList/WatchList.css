@@ -1,0 +1,23 @@
+/* WatchList.css */
+
+#watchListContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .movie-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .left-side img {
+    max-width: 100px;
+    max-height: 150px;
+    object-fit: cover;
+  }
+  
+  .right-side {
+    margin-left: 20px;
+  }
+  
+  

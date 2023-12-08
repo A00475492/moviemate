@@ -1,0 +1,62 @@
+
+.movie-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .movie-details-movie-card {
+    display: flex;
+    align-items: flex-start;
+    /* width: 80%;
+    margin-top: 20px; */
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .poster-image {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .movie-info {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .trailer-video {
+    height: 25vh; 
+    margin-bottom: 20px; 
+    width: 100%;
+  }
+  
+  .average-rating {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .back-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .loading {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  

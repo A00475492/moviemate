@@ -1,0 +1,47 @@
+/* Common styles for form elements */
+.form-element {
+    margin-bottom: 16px;
+  }
+  
+  /* Movie Grid */
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+  
+  /* Movie Card */
+  .movie-card {
+    
+    /* background-color: #f9f9f9; */
+    border: 1px solid white;
+    color: white !important;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .movie-card h2 {
+    color: white;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    height: 300px;
+  }
+  
+  /* Movie Filters Container */
+  .movie-filters-container {
+    display: flex;
+    width: 50%;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Filter Dropdown */
+  .filter-dropdown {
+    width: 33%;
+    color: blue;
+  }
+  

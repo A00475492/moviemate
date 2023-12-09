@@ -1,62 +1,60 @@
-
 .movie-details-container {
-    display: flex;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-details-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-details-poster {
+  width: 40%;
+  object-fit: cover;
+}
+
+.movie-details-trailer {
+  width: 55%;
+}
+
+.movie-details-body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.movie-details-info {
+  background: white;
+  padding: 20px;
+}
+
+.movie-details-rating,
+.movie-details-user-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.movie-details-average-rating {
+  font-weight: bold;
+}
+
+.back-button {
+  align-self: center;
+  margin-top: 20px;
+}
+
+/* Add responsive design as needed */
+@media (max-width: 768px) {
+  .movie-details-header {
     flex-direction: column;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.5);
   }
-  
-  .movie-details-movie-card {
-    display: flex;
-    align-items: flex-start;
-    /* width: 80%;
-    margin-top: 20px; */
-    /* border: 1px solid #ddd; */
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .poster-image {
-    width: 150px;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .movie-info {
-    padding: 20px;
-    text-align: left;
-  }
-  
-  .trailer-video {
-    height: 25vh; 
-    margin-bottom: 20px; 
+
+  .movie-details-poster,
+  .movie-details-trailer {
     width: 100%;
   }
-  
-  .average-rating {
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .back-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .loading {
-    font-size: 18px;
-    margin-top: 20px;
-  }
-
-  
+}

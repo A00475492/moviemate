@@ -142,64 +142,58 @@ const MovieDetails = () => {
       });
     }
   };
-
   return (
     <div className="movie-details-container">
+      <div className="movie-details-header">
+        {/* <img className="movie-details-poster" src={movieDetails.poster} alt="Movie Poster" /> */}
+        <div class="short-card">
+        <img
+          class="movie-details-poster"
+          src= {movieDetails.poster}
+          alt="Movie Poster"
+          style={{ width: '150%', height: '300px' }} 
+        />
+      </div>
       <ReactPlayer
-        className="trailer-video"
+        className="movie-details-trailer"
         url={movieDetails.trailer}
         controls
-        width="100%"
-        height="50vh"
+        width="78%"
+        style={{ height: 'auto', aspectRatio: '16/9' }} // This will maintain a 16:9 aspect ratio
       />
-
-      <div style={{display: 'flex', height: '50vh'}}>
-          <div className="movie-details-movie-card">
-        <img className="poster-image" src={movieDetails.poster} alt="Movie Poster" />
+      </div>
+      <div className="movie-details-body">
+        <div className="movie-details-info">
+          <h2>{movieDetails.title}</h2>
+          <p>Synopsis: {movieDetails.synopsis}</p>
+          <p>Genre: {movieDetails.genre.name}</p>
+          <div className="movie-details-rating">
+          Average Rating: 
+            <Rating value={movieDetails.averageRating} readOnly />
+            <span className="movie-details-average-rating"> {movieDetails.averageRating}</span>
           </div>
-      
-          <div className="movie-info">
-        <h2>{movieDetails.title}</h2>
-        <p className="synopsis">Synopsis: {movieDetails.synopsis}</p>
-        <p className="genre">Genre: {movieDetails.genre.name}</p>
-        <p className="average-rating">
-          Average Rating:
-          <Box component="fieldset" borderColor="transparent" >
-            <Rating name="read-only" value={movieDetails.averageRating} readOnly precision={0.5} />
-          </Box>
-        </p>
-        {hasRated ? (
-          <p className="user-rating">
-            Your Rating: {userRating}
-          </p>
-        ) : (
-          <p className="user-rating">
+          <div className="movie-details-user-rating">
             Your Rating:
-            <Box component="fieldset" borderColor="transparent">
-              <Rating
-                name="user-rating"
-                value={userRating}
-                onChange={(event, newValue) => handleUserRatingChange(newValue)}
-                precision={0.5}
-              />
-            </Box>
-          </p>
-        )}
-        
-            </div>
-
+            <Rating
+              value={userRating}
+              onChange={(event, newValue) => handleUserRatingChange(newValue)}
+            />
+            {hasRated && <span>Your Rating: {userRating}</span>}
+          </div>
           <span>
             <FavoriteBorderIcon style={{cursor: 'pointer', marginRight: '10px'}} onClick={() => favoriteOnClick()} />
             Add to favorites
           </span>
-      </div>
 
-      
-      <button className="back-button" style={{ backgroundColor: '#54B4D3' }}   onClick={handleBackButtonClick}>
+        </div>
+      </div>
+      <button className="back-button" onClick={handleBackButtonClick}>
         Back to Movie Home
       </button>
     </div>
   );
+
+
 };
 
 export default MovieDetails;

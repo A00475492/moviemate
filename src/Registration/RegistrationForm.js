@@ -27,19 +27,22 @@ const RegistrationForm = ({ onRegistration }) => {
 
   const validateForm = useCallback(() => {
     const newErrors = {};
+    const invalidCharacters = /[;:!@#$%^*+?/<>1234567890]/;
 
-    ['firstName', 'lastName'].forEach((field) => {
+
+    ['firstName', 'lastName','city'].forEach((field) => {
       if (!formData[field]) {
         newErrors[field] = 'This field is required';
+      } else {
+
+        if (invalidCharacters.test(formData[field])) {
+          newErrors[field] = 'Invalid characters are not allowed';
+        }
       }
     });
 
-    const invalidCharacters = /[;:!@#$%^*+?/<>1234567890]/;
-    ['firstName', 'lastName'].forEach((field) => {
-      if (invalidCharacters.test(formData[field])) {
-        newErrors[field] = 'Invalid characters are not allowed';
-      }
-    });
+   
+
 
     if (formData.country !== 'US' && formData.country !== 'Canada') {
       newErrors.country = 'Country must be US or Canada';
@@ -97,11 +100,27 @@ const RegistrationForm = ({ onRegistration }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const invalidCharacters = /[;:!@#$%^*+?/<>1234567890]/;
+    const hasInvalidCharacters = invalidCharacters.test(value);
+  
+    if (name === 'firstName' || name === 'lastName' || name === 'city' ) {
+      if (hasInvalidCharacters) {
+        setErrors({
+          ...errors,
+          [name]: `${name.charAt(0).toUpperCase() + name.slice(1)} should not contain special characters or numbers.`,
+        });
+      } else {
+        setErrors({
+          ...errors,
+          [name]: '',
+        });
+      }
+    }
     if (name === 'country') {
       setFormData({
         ...formData,
         [name]: value,
-        province: '', // Reset province when the country changes
+        province: '', 
       });
     } else {
       setFormData({
@@ -164,7 +183,6 @@ const RegistrationForm = ({ onRegistration }) => {
     <div className='registration-form-container' style={{backgroundColor:'black'}}>
       <form onSubmit={handleSubmit} >
         <div className="form-group">
-          {/* <div className='form-group-left'> */}
           <div className='form-row'>
 
             <div className='form-field'>
@@ -245,6 +263,7 @@ const RegistrationForm = ({ onRegistration }) => {
             value={formData.city}
             onChange={handleInputChange}
           />
+          {errors.city && <span className="error-message">{errors.city}</span>}
             </div>
 
             <div className='form-field'>

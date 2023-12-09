@@ -26,7 +26,7 @@ const PaymentDashboard = () => {
         text: 'You need to log in to access this page.',
       });
       navigate("/login");
-    } else if (user.userType === "user") {
+    } else if (user.userType === "user" || user.userType === "producer") {
       Swal.fire({
         icon: 'error',
         title: 'Unauthorized Access',

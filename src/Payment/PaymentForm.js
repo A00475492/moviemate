@@ -18,6 +18,22 @@ const PaymentForm = () => {
   
 
   const movie = (location.state && location.state.formData) || null;
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+  
+    const invalidCharacters = /[;:!@#$%^*+?/<>1234567890]/;
+    const hasInvalidCharacters = invalidCharacters.test(value);
+  
+    if (hasInvalidCharacters) {
+      setCardholderNameError('Cardholder name should not contain special characters or numbers.');
+    } else {
+      setCardholderNameError('');
+      
+    }
+    setName(value);
+  
+    
+  };
 
   useEffect(() => {
     if (!user ) {
@@ -44,6 +60,8 @@ const PaymentForm = () => {
   const [cvv, setCvv] = useState('');
   const [cardType, setCardType] = useState('');
   const [isExpiryValid, setIsExpiryValid] = useState(true);
+  const [cardholderNameError, setCardholderNameError] = useState(''); 
+
 
   const [cvvError, setCvvError] = useState(false)
   const cvvRegex = /^[0-9]{3}$/;
@@ -91,23 +109,29 @@ const PaymentForm = () => {
   const handleExpiryChange = (e) => {
     const inputValue = e.target.value;
     setExpiry(inputValue);
-
-    const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-
+  
+    const expiryRegex = /^(0[1-9]|1[0-2])\/\d{4}$/;
+  
     const isValidFormat = expiryRegex.test(inputValue);
-
+  
     if (isValidFormat) {
       const [month, year] = inputValue.split('/');
-
-      const expiryDate = new Date(`20${year}`, month - 1);
-      setIsExpiryValid(expiryDate > new Date());
+  
+      const expiryDate = new Date(`${year}-${month}-01`);
+  
+      if (expiryDate >= new Date("2016-01-01") && expiryDate <= new Date("2031-12-31") ) {
+        setIsExpiryValid(true);
+      } else {
+        setIsExpiryValid(false);
+      }
     } else {
       setIsExpiryValid(false);
     }
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !cardNumber || !expiry || !cvv || !cardType || !isExpiryValid || cvvError) {
+    if (!name || !cardNumber || !expiry || !cvv || !cardType || !isExpiryValid || cvvError || cardholderNameError ) {
       console.error('Invalid form data. Please check all fields.');
       return;
     }
@@ -173,8 +197,9 @@ const PaymentForm = () => {
     <div className="payment-form">
       <h2 style={{color: 'white'}}>Payment Details</h2>
       <form onSubmit={handleSubmit} style={{backgroundColor: 'rgba(255, 255, 255, 0.8)', color: 'black'}}>
-        <label htmlFor="name">Name on Card</label>
-        <input id="name" type="text" value={name} onChange={e => setName(e.target.value)} />
+      <label htmlFor="name">Name on Card</label>
+      <input id="name" type="text" value={name} onChange={handleNameChange} />
+      {cardholderNameError && <span className="error-message">{cardholderNameError}</span>}
         
         <label htmlFor="cardNumber">Card Number</label>
         <input id="cardNumber" type="text" value={cardNumber} onChange={handleCardNumberChange} />
@@ -188,10 +213,10 @@ const PaymentForm = () => {
               type="text"
               value={expiry}
               onChange={handleExpiryChange}
-              placeholder="MM/YY"
+              placeholder="MM/YYYY"
               style={{ borderColor: isExpiryValid ? 'initial' : 'red' }}
             />
-            {!isExpiryValid && <p style={{ color: 'red' }}>Please enter a valid and future expiry date (MM/YY).</p>}
+            {!isExpiryValid && <p style={{ color: 'red' }}>Please enter a valid and future expiry date (MM/YYYY).</p>}
           </div>
           
           <div>

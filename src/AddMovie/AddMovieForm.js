@@ -174,9 +174,9 @@ const AddMovieForm = ({ onAddMovie }) => {
     }
   };
     return (
-    <div className="add-movie-form">
+< div className="add-movie-form">
       <h3>Add a New Movie</h3>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} style={{ width: '100%' }}>
         <label>
           Title:
           <input

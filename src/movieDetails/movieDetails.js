@@ -195,7 +195,7 @@ const MovieDetails = () => {
       </div>
 
       
-      <button className="back-button" onClick={handleBackButtonClick}>
+      <button className="back-button" style={{ backgroundColor: '#54B4D3' }}   onClick={handleBackButtonClick}>
         Back to Movie Home
       </button>
     </div>

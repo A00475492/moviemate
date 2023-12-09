@@ -91,7 +91,7 @@ const AddActor = () => {
 
   return (
     <div className="container">
-      <h1>Add Actor</h1>
+      <h1 style={{color:"white"}}>Add Actor</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input

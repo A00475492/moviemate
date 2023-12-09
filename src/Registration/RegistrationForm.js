@@ -89,7 +89,7 @@ const RegistrationForm = ({ onRegistration }) => {
   };
 
   const isValidPhoneNumber = (phoneNumber) => {
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^\+1\d{10}$/;
     return phoneRegex.test(phoneNumber);
   };
 

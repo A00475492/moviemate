@@ -37,8 +37,10 @@ const WatchList = () => {
   return (
     <div id="watchListContainer">
       {watchList.map((entry) => (
+        
         <div key={entry.id} className="movie-container" style={{ color: 'white' }}>
         {/* Your content goes here */}
+
           <div className="left-side img">
           <img src={entry.poster} alt="Movie Poster" />
 

@@ -70,7 +70,7 @@ const AddGenre = () => {
   return (
     <div className="genre-container">
       <h1>Add Genre</h1>
-      <form>
+      <form style={{ width: '100%' }}>
         <label htmlFor="name">Name:</label>
         <input
           type="text"

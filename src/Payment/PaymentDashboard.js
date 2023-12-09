@@ -64,9 +64,9 @@ const PaymentDashboard = () => {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
-      <h1 style={{ color: '#333', borderBottom: '2px solid #333', paddingBottom: '10px' }}>Payment Dashboard</h1>
+      <h1 style={{ color: 'white', borderBottom: '2px solid #333', paddingBottom: '10px' }}>Payment Dashboard</h1>
 
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ color: 'white', marginTop: '20px' }}>
         <h2>Total Amount: ${calculateTotalAmount()}</h2>
       </div>
 
